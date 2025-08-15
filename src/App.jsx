@@ -9,6 +9,7 @@ import Speakers from './pages/Speakers';
 import EventDetail from './pages/EventDetail';
 import Projects from './pages/Projects';
 import ChatBox from './pages/ChatBox';
+import Dashboard from './pages/admin/dashboard';
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/events/:eventId" element={<EventDetail />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/chat" element={<ChatBox/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         {/* Bạn có thể thêm các route khác ở đây */}
         
       </Routes>

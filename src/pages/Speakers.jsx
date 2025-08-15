@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabase/supabase';
 
 export default function Speakers() {
   const [speakers, setSpeakers] = useState([]);
@@ -15,6 +15,7 @@ export default function Speakers() {
       if (error) {
         console.error('Lỗi khi tải dữ liệu diễn giả:', error);
       } else {
+        console.log(data);
         setSpeakers(data);
       }
       setLoading(false);

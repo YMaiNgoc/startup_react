@@ -1,6 +1,6 @@
 // src/pages/Projects.jsx
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "../lib/supabase/supabase";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);

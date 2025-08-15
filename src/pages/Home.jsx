@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabase/supabase';
 import ChatBox from './ChatBox';
 
 export default function Home() {
@@ -75,6 +75,8 @@ export default function Home() {
       </div>
     );
   }
+
+  console.log(events)
 
   return (
     <div className="container mt-5">
