@@ -36,7 +36,7 @@ export default function Home() {
         .limit(3);
 
       if (eventsError || projectsError || startupsError || speakersError) {
-        console.error('Lỗi khi tải dữ liệu:', {
+        console.error('Lỗi khi tải dữ lxiệu:', {
           eventsError,
           projectsError,
           startupsError,
@@ -75,8 +75,6 @@ export default function Home() {
       </div>
     );
   }
-
-  console.log(events)
 
   return (
     <div className="container mt-5">
