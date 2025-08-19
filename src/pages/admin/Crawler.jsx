@@ -15,7 +15,7 @@ const Crawler = ({firstPage = 0}) => {
     const renders = [
         <List currentIndex={index} nextIndex={setIndex} />,
         <Loading currentIndex={index} nextIndex={setIndex} setData={setData} />,
-        <Event currentIndex={index} nextIndex={setIndex} event={data.title}/>,
+        // <Event currentIndex={index} nextIndex={setIndex} event={data.title}/>,
         <Speaker currentIndex={index} nextIndex={setIndex} speakers= {data.speakers}/>, 
         <Startup currentIndex={index} nextIndex={setIndex} startups={data.startups}/>
     ]
@@ -61,7 +61,6 @@ const List = ({currentIndex, nextIndex}) => {
 
 const Loading = ({currentIndex, nextIndex, setData}) => {
 
-    const [loading, setLoading] = useState(false);
     const crawl = async () => {
         try {
             const response = await axios.get('http://localhost:8800/api/crawler/surfdanang');
@@ -70,18 +69,15 @@ const Loading = ({currentIndex, nextIndex, setData}) => {
         } catch (error) {
             console.error('Error fetching speakers:', error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     }
 
     useEffect(() => {
         crawl()
     })
-
-    if (loading) return <div className="container mt-5">Đang crawl dữ liệu...</div>;
-
-    return ( <div className="container mt-5"> --- Hoàn tất ---  </div> )
+    
+    return <div className="container mt-5">Đang crawl dữ liệu...</div>;
 }
-
 
 export default Crawler

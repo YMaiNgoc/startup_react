@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 const Event = ({ event }) => {
-    const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState({
         name: event.name,
