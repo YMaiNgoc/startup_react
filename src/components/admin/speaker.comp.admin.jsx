@@ -59,7 +59,7 @@ const Speaker = ({ speakers }) => {
                 {speakerData.map( (e, index) => (
                     <div key={e.id || index} className="col-md-3 mb-3">
                         <div className="card h-100">
-                            {e.edited.img && <img src={e.edited.img} className="card-img-top" alt={e.edited.name} style={{ maxHeight: '150px', objectFit: 'contain' }} />}
+                            <img src={e.edited.img} className="card-img-top" alt={e.edited.name} style={{ maxHeight: '150px', objectFit: 'contain' }} />
                             <div className="card-body">
                                 <h6 className="pt-1">Tên diễn giả</h6>
                                 <input
