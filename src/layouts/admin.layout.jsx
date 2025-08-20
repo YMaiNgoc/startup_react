@@ -49,7 +49,7 @@ const AdminLayout = () => {
                 </Navbar>
                 <br />
                 {/* Content */}
-                <Container fluid>
+                <Container >
                     {children}
                 </Container>
             </div>

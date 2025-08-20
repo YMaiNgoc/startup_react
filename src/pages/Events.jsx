@@ -27,6 +27,7 @@ export default function Events() {
   if (loading) return <div className="container mt-5">Đang tải sự kiện...</div>;
 
   return (
+    
     <div className="container mt-5">
       <h1 className="mb-4 text-center">Danh sách Sự kiện</h1>
       {events.length === 0 ? (
