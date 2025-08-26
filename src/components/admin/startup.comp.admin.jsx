@@ -12,7 +12,7 @@ const StartupComponentAdmin = ({ startups }) => {
         setIsEditing(true);
     };
 
-    const handleSaveEdited= (updatedStartup) => {
+    const handleSaveEdited = (updatedStartup) => {
         const updatedData = [...startupData];
         updatedData[editingIndex] = updatedStartup;
         setSpeakerData(updatedData);
@@ -25,7 +25,7 @@ const StartupComponentAdmin = ({ startups }) => {
         setEditingIndex(null);
     };
 
-        const handleSaveData = () => {
+    const handleSaveData = () => {
         console.log("Handle Save Data")
     }
 
@@ -87,7 +87,10 @@ const StartupComponentAdmin = ({ startups }) => {
                             <ButtonComponentAdmin
                                 onCancel={onCancel}
                                 onSave={onSave}
-                                paramOnSave={ editedData } />
+                                paramOnSave={editedData}
+                                cancelName={"Hủy bỏ"}
+                                saveName={"Xong"}
+                            />
                         </div>
                     </div>
                 </div>
@@ -114,7 +117,13 @@ const StartupComponentAdmin = ({ startups }) => {
                             key={startup.id || index}
                             startup={startup}
                             action={handleEditMode}
-                            button={<ButtonComponentAdmin onCancel={handleCancelSave} onSave={handleSaveData} />}
+                            button={<ButtonComponentAdmin
+                                onCancel={handleCancelSave}
+                                onSave={handleSaveData}
+                                paramOnSave={editedData}
+                                cancelName={"Xóa"}
+                                saveName={"Lưu trữ"}
+                            />}
                             params={{ index }}
                         />
                     ))}

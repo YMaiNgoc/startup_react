@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SpeakerComponentUI from "../ui/speaker.comp.ui";
 import ButtonComponentAdmin from "./button.comp.admin";
+import axios from 'axios';
 
 const SpeakerComponentAdmin = ({ speakers }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -28,8 +29,15 @@ const SpeakerComponentAdmin = ({ speakers }) => {
     };
 
     // --- Function For Save ---
-    const handleSaveData = () => {
-        console.log("Handle Save Data")
+    const handleSaveData = async (speaker) => {
+        const {data} = await axios.get("http://localhost:8800/api/speaker?name=" + speaker.name);
+        if (data.speakers == []){
+            console.log("not exit")
+        } else {
+            console.log(console.log({"id" : data.speakers[0].id}))
+        }
+        // const data = await axios.post("http://localhost:8800/api/speaker", { speaker})
+        // console.log(response)
     }
 
     const handleCancelSave = () => {
@@ -61,8 +69,8 @@ const SpeakerComponentAdmin = ({ speakers }) => {
                             name="name"
                             className="form-control mb-2"
                             value={editedData.name}
+                            onChange={handleChange}
                             placeholder="Tên diễn giả"
-                            readOnly
                         />
                         <h6 className="pt-1">Chức vụ</h6>
                         <textarea
@@ -78,6 +86,8 @@ const SpeakerComponentAdmin = ({ speakers }) => {
                         onCancel={onCancel}
                         onSave={onSave}
                         paramOnSave={editedData}
+                        cancelName={"Hủy bỏ"}
+                        saveName={"Xong"}
                     />
                 </div>
             </div>
@@ -101,7 +111,15 @@ const SpeakerComponentAdmin = ({ speakers }) => {
                             key={speaker.id || index}
                             speaker={speaker}
                             action={handleEditMode}
-                            button={<ButtonComponentAdmin onCancel={handleCancelSave} onSave={handleSaveData} />}
+                            button={
+                                <ButtonComponentAdmin
+                                    onCancel={handleCancelSave}
+                                    onSave={handleSaveData}
+                                    paramOnSave={speaker}
+                                    saveName={"Lưu trữ"}
+                                    cancelName={"Xóa"}
+                                />
+                            }
                             params={{ index }}
                         />
                     ))
