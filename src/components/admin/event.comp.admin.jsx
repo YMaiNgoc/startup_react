@@ -95,17 +95,21 @@ const EventComponentAdmin = ({ nextIndex, goNextIndex, event }) => {
         );
     }
 
-    const handleCancelSave = () => { }
+    const handleCancelSave = () => {
+        const choice = confirm("Bạn muốn hủy cralw dữ liệu ???")
+        if (choice) return goNextIndex(0);
+    }
+    
     const handleSaveData = async (event) => {
         console.log(editedData);
         const { data } = await axios.post("http://localhost:8800/api/event", { event })
         if (data.error) {
-            if (data.error == "duplication") {
-                console.log("duplication");
-            }
-        } else if (data.event_id) {
+            alert(data.error);
+            return goNextIndex(0);
+        }
+        if (data.event_id) {
             sessionStorage.setItem("event_id", data.event_id);
-            goNextIndex(nextIndex);
+            return goNextIndex(nextIndex);
         }
     }
 
