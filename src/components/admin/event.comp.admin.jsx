@@ -3,17 +3,9 @@ import EventComponentUI from '../ui/event.comp.ui';
 import ButtonComponentAdmin from './button.comp.admin';
 import axios from 'axios';
 
-const EventComponentAdmin = ({ event }) => {
+const EventComponentAdmin = ({ nextIndex, goNextIndex, event }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [editedData, setEditedData] = useState({
-        name: event.name,
-        title: event.title,
-        description: event.description,
-        start_date: event.start_date,
-        end_date: event.end_date,
-        source_name: event.source_name,
-        detail: event.detail
-    });
+    const [editedData, setEditedData] = useState({ ...event });
 
     const handleEditMode = () => {
         setIsEditing(true);
@@ -103,16 +95,18 @@ const EventComponentAdmin = ({ event }) => {
         );
     }
 
-    const handleCancelSave = () => {}
-    const handleSaveData = async(event) => {
+    const handleCancelSave = () => { }
+    const handleSaveData = async (event) => {
         console.log(editedData);
-        const {data} = await axios.post("http://localhost:8800/api/event", {event})
+        const { data } = await axios.post("http://localhost:8800/api/event", { event })
         if (data.error) {
             if (data.error == "duplication") {
                 console.log("duplication");
             }
+        } else if (data.event_id) {
+            sessionStorage.setItem("event_id", data.event_id);
+            goNextIndex(nextIndex);
         }
-        sessionStorage.setItem("event_id", data.event_id);
     }
 
     // --- return ---
@@ -126,17 +120,17 @@ const EventComponentAdmin = ({ event }) => {
                         setOrigin={setEditedData}
                         setIsEditing={setIsEditing} />
                     :
-                    <EventComponentUI 
+                    <EventComponentUI
                         event={editedData}
-                            button={
-                                <ButtonComponentAdmin 
-                                    onCancel={handleCancelSave}
-                                    onSave={handleSaveData} 
-                                    paramOnSave={editedData}
-                                    saveName={"Lưu trữ"}
-                                    cancelName={"Xóa"}
-                                />
-                            }
+                        button={
+                            <ButtonComponentAdmin
+                                onCancel={handleCancelSave}
+                                onSave={handleSaveData}
+                                paramOnSave={editedData}
+                                saveName={"Lưu trữ"}
+                                cancelName={"Xóa"}
+                            />
+                        }
                         action={handleEditMode} />
                 }
             </div>

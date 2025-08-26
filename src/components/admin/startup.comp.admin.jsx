@@ -120,7 +120,7 @@ const StartupComponentAdmin = ({ startups }) => {
                             button={<ButtonComponentAdmin
                                 onCancel={handleCancelSave}
                                 onSave={handleSaveData}
-                                paramOnSave={editedData}
+                                paramOnSave={startupData}
                                 cancelName={"Xóa"}
                                 saveName={"Lưu trữ"}
                             />}

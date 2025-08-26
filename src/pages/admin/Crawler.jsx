@@ -107,8 +107,6 @@ const Loading = ({ goNextIndex, nextIndex, source, setData }) => {
         }
     }
 
-
-
     useEffect(() => {
         crawl()
     })
