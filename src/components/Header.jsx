@@ -13,7 +13,7 @@ export default function Header() {
           <a href="/" className="text-dark text-decoration-none hover-primary">Trang chủ</a>
           <a href="/events" className="text-dark text-decoration-none hover-primary">Sự kiện</a>
           <a href="/projects" className="text-dark text-decoration-none hover-primary">Dự án</a>
-          <a href="/startups" className="text-dark text-decoration-none hover-primary">Startups</a>
+          {/* <a href="/startups" className="text-dark text-decoration-none hover-primary">Startups</a> */}
           <a href="/speakers" className="text-dark text-decoration-none hover-primary">Diễn giả</a>
         </nav>
 

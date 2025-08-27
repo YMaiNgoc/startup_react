@@ -5,7 +5,6 @@ import { supabase } from '../lib/supabase/supabase';
 export default function EventDetail() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
-  const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,19 +23,6 @@ export default function EventDetail() {
         return;
       }
       setEvent(eventData);
-
-      const { data: detailData, error: detailError } = await supabase
-        .from('event_details')
-        .select('*')
-        .eq('event_id', eventId)
-        .order('date', { ascending: true });
-
-      if (detailError) {
-        console.error('Lỗi lấy chi tiết event:', detailError);
-      } else {
-        setDetails(detailData);
-      }
-
       setLoading(false);
     }
 
@@ -71,10 +57,10 @@ export default function EventDetail() {
         Timeline chi tiết sự kiện
       </h3>
 
-      {details.length === 0 && <p>Không có chi tiết cho sự kiện này.</p>}
+      {event.detail.length === 0 && <p>Không có chi tiết cho sự kiện này.</p>}
 
       <ul className="list-unstyled position-relative">
-        {details.map((detail, idx) => (
+        {event.detail.map((detail, idx) => (
           <li
             key={detail.id}
             className="mb-5 position-relative ps-4"
@@ -93,7 +79,7 @@ export default function EventDetail() {
                 boxShadow: '0 0 6px rgba(13, 110, 253, 0.7)',
               }}
             ></span>
-            {idx !== details.length - 1 && (
+            {idx !== event.detail.length - 1 && (
               <span
                 style={{
                   position: 'absolute',

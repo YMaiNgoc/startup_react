@@ -13,7 +13,7 @@ export default function Projects() {
     async function fetchProjects() {
       setLoading(true);
       const { data, error } = await supabase
-        .from("projects")
+        .from("startups")
         .select("*")
         .order("id", { ascending: true });
 
