@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase/supabase';
 import ChatBox from './ChatBox';
+import axios from 'axios';
 
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [startups, setStartups] = useState([]);
   const [speakers, setSpeakers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -14,43 +14,17 @@ export default function Home() {
     async function fetchData() {
       setLoading(true);
 
-      const { data: eventsData, error: eventsError } = await supabase
-        .from('events')
-        .select('*')
-        .order('start_date', { ascending: false })
-        .limit(3);
+      const { data: eventsData } = await axios.get("http://localhost:8800/api/event?limit=3")
+      const { data: projectsData  } = await axios.get("http://localhost:8800/api/startup?limit=3")
+      const { data: speakersData} = await axios.get("http://localhost:8800/api/speaker?limit=3")
 
-      const { data: projectsData, error: projectsError } = await supabase
-        .from('projects')
-        .select('*')
-        .limit(3);
+        setEvents(eventsData.events || []);
+        setProjects(projectsData.startups || []);
+        setSpeakers(speakersData.speakers || []);
 
-      const { data: startupsData, error: startupsError } = await supabase
-        .from('startups')
-        .select('*')
-        .limit(3);
-
-      const { data: speakersData, error: speakersError } = await supabase
-        .from('speakers')
-        .select('*')
-        .limit(3);
-
-      if (eventsError || projectsError || startupsError || speakersError) {
-        console.error('Lỗi khi tải dữ lxiệu:', {
-          eventsError,
-          projectsError,
-          startupsError,
-          speakersError
-        });
-      } else {
-        setEvents(eventsData || []);
-        setProjects(projectsData || []);
-        setStartups(startupsData || []);
-        setSpeakers(speakersData || []);
+        setLoading(false);
       }
 
-      setLoading(false);
-    }
 
     fetchData();
   }, []);
