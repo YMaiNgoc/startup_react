@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase/supabase';
-import ChatBox from './ChatBox';
 import axios from 'axios';
 
 export default function Home() {
@@ -140,7 +138,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <ChatBox/>
     </div>
   );
 }

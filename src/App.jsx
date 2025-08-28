@@ -7,8 +7,9 @@ import Events from './pages/Events';
 import Speakers from './pages/Speakers';
 import EventDetail from './pages/EventDetail';
 import Projects from './pages/Projects';
-import ChatBox from './pages/ChatBox';
-import Dashboard from './pages/admin/dashboard';
+import AdminLayout from "./layouts/admin.layout";
+
+// import Dashboard from './pages/admin/dashboard';
 function App() {
   return (
     <BrowserRouter>
@@ -19,7 +20,8 @@ function App() {
         <Route path="/speakers" element={<Speakers />} />
         <Route path="/events/:eventId" element={<EventDetail />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/chat" element={<ChatBox />} />
+        <Route path="/admin" element={<AdminLayout></AdminLayout>} />
+
       </Routes>
       <Footer />
     </BrowserRouter>

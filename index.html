@@ -10,11 +10,15 @@
 
     <title>Vite + React</title>
 </head>
-
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/@kieng/just-chat/dist/just-chat.umd.js" data-webhook-url="http://localhost:5678/webhook-test/4ea1ba85-7d45-46d6-9a5c-72096fd447c6" data-theme-color="#1E40AF" data-position="bottom-right" data-title="Chat with us"
-        data-welcome-message="How can we help you today?" data-history-enabled="true" data-history-clear-button="true" defer>
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://thithuy.app.n8n.cloud/webhook/2e3d5964-d029-4c0d-b1d0-408a5b8b917b/chat',
+    });
+  </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 </body>
